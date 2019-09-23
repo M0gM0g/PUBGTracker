@@ -12,15 +12,18 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-    @IBAction func submitButton(_ sender: Any) {
-        
-        
+    
+    @IBAction func submitButton(_ sender: Any ) {
+        let text: String = usernameTextField.text ?? ""
+        NetworkPubg().sendUserNameInfo(userName: text)
+
     }
     
     
