@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5146CAF52334E59000B91CF2 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5146CAF42334E59000B91CF2 /* Networking.swift */; };
+		5146CAF52334E59000B91CF2 /* NetworkPubg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5146CAF42334E59000B91CF2 /* NetworkPubg.swift */; };
 		515396872333A5700003DFCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515396862333A5700003DFCA /* AppDelegate.swift */; };
 		515396892333A5700003DFCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515396882333A5700003DFCA /* ViewController.swift */; };
 		5153968C2333A5700003DFCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153968A2333A5700003DFCA /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5146CAF42334E59000B91CF2 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		5146CAF42334E59000B91CF2 /* NetworkPubg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPubg.swift; sourceTree = "<group>"; };
 		515396832333A5700003DFCA /* PubgStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubgStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		515396862333A5700003DFCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		515396882333A5700003DFCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 				5153968F2333A5710003DFCA /* LaunchScreen.storyboard */,
 				515396922333A5710003DFCA /* Info.plist */,
 				5153969A23340AED0003DFCA /* Stat.swift */,
-				5146CAF42334E59000B91CF2 /* Networking.swift */,
+				5146CAF42334E59000B91CF2 /* NetworkPubg.swift */,
 			);
 			path = PubgStats;
 			sourceTree = "<group>";
@@ -141,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5146CAF52334E59000B91CF2 /* Networking.swift in Sources */,
+				5146CAF52334E59000B91CF2 /* NetworkPubg.swift in Sources */,
 				515396892333A5700003DFCA /* ViewController.swift in Sources */,
 				5153969B23340AED0003DFCA /* Stat.swift in Sources */,
 				515396872333A5700003DFCA /* AppDelegate.swift in Sources */,
