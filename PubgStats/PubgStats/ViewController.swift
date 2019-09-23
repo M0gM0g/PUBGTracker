@@ -10,54 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var usernameTextField: UITextField!
     
-    var searchResults: [Stat] = []
     
-    lazy var tapRecognizer: UITapGestureRecognizer = {
-        var recognizer = UITapGestureRecognizer(target:self, action: #selector(dismissKeyboard))
-        return recognizer
-    }()
-    
-    @objc func dismissKeyboard() {
-        searchBar.resignFirstResponder()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    @IBAction func submitButton(_ sender: Any) {
+        
+        
+    }
+    
+    
+    
 }
 
-extension ViewController: UISearchBarDelegate {
 
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        dismissKeyboard()
-
-        guard let searchText = searchBar.text, !searchText.isEmpty else {
-            return
-        }
-
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-
-        queryService.getStatsResults(searchTerm: searchText) { [weak self] results, errorMessage in UIApplication.shared.isNetworkActivityIndicatorVisible = false
-
-            if let results = results {
-                self?.searchResults = results
-            }
-
-
-            if !errorMessage.isEmpty {
-                print("Search Error: " + errorMessage)
-            }
-        }
-    }
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        view.addGestureRecognizer(tapRecognizer)
-    }
-
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        view.removeGestureRecognizer(tapRecognizer)
-    }
-
-}
