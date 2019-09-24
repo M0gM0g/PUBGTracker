@@ -18,9 +18,12 @@ class NetworkPubg {
     func sendUserNameInfo (userName: String) {
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players?filter[playerNames]=\(userName)")!
+        var getRequest = URLRequest(url: url)
         
-        let task = session.dataTask(with: url, completionHandler: { data, response, error in
+        getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         
+        let task = session.dataTask(with: getRequest, completionHandler: { data, response, error in
         print(data)
         print(response)
         print(error)
