@@ -19,27 +19,16 @@ class NetworkPubg {
         getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         
-        let task = session.dataTask(with: getRequest, completionHandler: { data, response, error -> Void in
-            if error != nil {
-                print("GET request: Communication Error: \(String(describing: error))")
-            }
+        session.dataTask(with: getRequest) { (data, response, error) in
+            guard let data = data else { return }
+            let jsonDecoder = JSONDecoder()
             
-            if data != nil {
-                do {
-                    let resultObject = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
-                    print(resultObject)
-                } catch {
-                        print("Unable to parse JSON response")
-                    
-                }
-            } else {
-                    print("Received empty response.")
+            guard let player = try? jsonDecoder.decode(Welcome.self, from: data) else {
+                print("Error: couldnt decode data")
+                return
             }
-        })
-        task.resume()
+            print("player id is \(player)")
+        
+        }.resume()
     }
-    
-    
-    
-    
 }
