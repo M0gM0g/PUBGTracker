@@ -8,24 +8,27 @@
 
 import Foundation
 
-//https://api.pubg.com/shards/steam/players?filter[playerNames]=MogMog
-//curl -X GET "https://api.pubg.com/shards/steam/players?filter[playerNames]=MogMog" -H "accept: application/vnd.api+json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJlYzEyMTA2MC1iZDAyLTAxMzctNWE4Yi02OWIwNDIzNDczYzAiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTY4ODk0Mzk2LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6Im1hcmttb2xlYXJ5LWdtIn0.URs3K6ENnIKCQofOCvKJIecUk5GmFz-twmw2CzG2MMg"
-
-
 class NetworkPubg {
     let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJlYzEyMTA2MC1iZDAyLTAxMzctNWE4Yi02OWIwNDIzNDczYzAiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTY4ODk0Mzk2LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6Im1hcmttb2xlYXJ5LWdtIn0.URs3K6ENnIKCQofOCvKJIecUk5GmFz-twmw2CzG2MMg"
     
     func sendUserNameInfo (userName: String) {
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players?filter[playerNames]=\(userName)")!
+        var getRequest = URLRequest(url: url)
         
-        let task = session.dataTask(with: url, completionHandler: { data, response, error in
+        getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         
-        print(data)
-        print(response)
-        print(error)
-    })
+        session.dataTask(with: getRequest) { (data, response, error) in
+            guard let data = data else { return }
+            let jsonDecoder = JSONDecoder()
+            
+            guard let player = try? jsonDecoder.decode(Welcome.self, from: data) else {
+                print("Error: couldnt decode data")
+                return
+            }
+            print("player id is \(player)")
         
-        task.resume()
-}
+        }.resume()
+    }
 }
