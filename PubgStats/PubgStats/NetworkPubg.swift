@@ -5,11 +5,12 @@
 //  Created by Mark O'Leary on 9/20/19.
 //  Copyright © 2019 Mark O'Leary. All rights reserved.
 //
-
+// account.c0cbf694696d4c77885dc75ea7d43df6
 import Foundation
 
 class NetworkPubg {
     let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJlYzEyMTA2MC1iZDAyLTAxMzctNWE4Yi02OWIwNDIzNDczYzAiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTY4ODk0Mzk2LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6Im1hcmttb2xlYXJ5LWdtIn0.URs3K6ENnIKCQofOCvKJIecUk5GmFz-twmw2CzG2MMg"
+    var playerToSend: String = ""
     
     func sendUserNameInfo (userName: String) {
         let session = URLSession.shared
@@ -21,14 +22,48 @@ class NetworkPubg {
         
         session.dataTask(with: getRequest) { (data, response, error) in
             guard let data = data else { return }
-            let jsonDecoder = JSONDecoder()
             
-            guard let player = try? jsonDecoder.decode(Welcome.self, from: data) else {
-                print("Error: couldnt decode data")
+            var json: Any?
+            do {
+                json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            } catch {
+                
+            }
+            
+            guard let jsonDict = json as? [String: Any] else {
                 return
             }
-            print("player id is \(player)")
+            
+            let account: String = ((jsonDict["data"] as! [Any])[0] as! [String: Any])["id"] as! String
+            
+            print(account)
         
+            self.playerToSend = account
+            
+            self.sendPlayerId()
+        }.resume()
+        
+    }
+    
+    func sendPlayerId () {
+        let session = URLSession.shared
+        let url = URL(string: "https://api.pubg.com/shards/steam/players/\(playerToSend)/seasons/lifetime")!
+        var getRequest = URLRequest(url: url)
+        
+        getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
+        getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        session.dataTask(with: getRequest) { (data, response, error) in
+            guard let data = data else { return }
+            
+            do {
+               let playerSeasonStats = try JSONDecoder().decode(PlayerSeasonStats.self, from: data)
+                print("headshot kills", playerSeasonStats.data?.attributes?.gameModeStats?.soloFpp?.headshotKills ?? -1)
+            } catch let jsonErr {
+                print(jsonErr)
+            }
+                
+                
         }.resume()
     }
 }

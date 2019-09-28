@@ -13,7 +13,7 @@
 		5153968C2333A5700003DFCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153968A2333A5700003DFCA /* Main.storyboard */; };
 		5153968E2333A5710003DFCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153968D2333A5710003DFCA /* Assets.xcassets */; };
 		515396912333A5710003DFCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153968F2333A5710003DFCA /* LaunchScreen.storyboard */; };
-		5153969B23340AED0003DFCA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153969A23340AED0003DFCA /* Player.swift */; };
+		5153969B23340AED0003DFCA /* PlayerSeasonStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153969A23340AED0003DFCA /* PlayerSeasonStats.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		5153968D2333A5710003DFCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		515396902333A5710003DFCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		515396922333A5710003DFCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5153969A23340AED0003DFCA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		5153969A23340AED0003DFCA /* PlayerSeasonStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSeasonStats.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 				5153968D2333A5710003DFCA /* Assets.xcassets */,
 				5153968F2333A5710003DFCA /* LaunchScreen.storyboard */,
 				515396922333A5710003DFCA /* Info.plist */,
-				5153969A23340AED0003DFCA /* Player.swift */,
+				5153969A23340AED0003DFCA /* PlayerSeasonStats.swift */,
 				5146CAF42334E59000B91CF2 /* NetworkPubg.swift */,
 			);
 			path = PubgStats;
@@ -143,7 +143,7 @@
 			files = (
 				5146CAF52334E59000B91CF2 /* NetworkPubg.swift in Sources */,
 				515396892333A5700003DFCA /* ViewController.swift in Sources */,
-				5153969B23340AED0003DFCA /* Player.swift in Sources */,
+				5153969B23340AED0003DFCA /* PlayerSeasonStats.swift in Sources */,
 				515396872333A5700003DFCA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,7 +23,6 @@ class ViewController: UIViewController {
     @IBAction func submitButton(_ sender: Any ) {
         let text: String = usernameTextField.text ?? ""
         NetworkPubg().sendUserNameInfo(userName: text)
-
     }
     
     
