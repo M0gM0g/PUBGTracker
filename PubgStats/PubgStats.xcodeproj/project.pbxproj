@@ -14,6 +14,7 @@
 		5153968E2333A5710003DFCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153968D2333A5710003DFCA /* Assets.xcassets */; };
 		515396912333A5710003DFCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153968F2333A5710003DFCA /* LaunchScreen.storyboard */; };
 		5153969B23340AED0003DFCA /* PlayerSeasonStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153969A23340AED0003DFCA /* PlayerSeasonStats.swift */; };
+		A8F1A1D823404B37008C7AE3 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F1A1D723404B37008C7AE3 /* StatsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		515396902333A5710003DFCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		515396922333A5710003DFCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5153969A23340AED0003DFCA /* PlayerSeasonStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSeasonStats.swift; sourceTree = "<group>"; };
+		A8F1A1D723404B37008C7AE3 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				515396922333A5710003DFCA /* Info.plist */,
 				5153969A23340AED0003DFCA /* PlayerSeasonStats.swift */,
 				5146CAF42334E59000B91CF2 /* NetworkPubg.swift */,
+				A8F1A1D723404B37008C7AE3 /* StatsViewController.swift */,
 			);
 			path = PubgStats;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				5146CAF52334E59000B91CF2 /* NetworkPubg.swift in Sources */,
 				515396892333A5700003DFCA /* ViewController.swift in Sources */,
 				5153969B23340AED0003DFCA /* PlayerSeasonStats.swift in Sources */,
+				A8F1A1D823404B37008C7AE3 /* StatsViewController.swift in Sources */,
 				515396872333A5700003DFCA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

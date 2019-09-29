@@ -23,9 +23,17 @@ class ViewController: UIViewController {
     @IBAction func submitButton(_ sender: Any ) {
         let text: String = usernameTextField.text ?? ""
         NetworkPubg().sendUserNameInfo(userName: text)
+        performSegue(withIdentifier: "mainToStatsSegue", sender: self)
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is StatsViewController
+        {
+            let vc = segue.destination as? StatsViewController
+            vc?.damageDealt = 
+        }
+    }
     
 }
 
