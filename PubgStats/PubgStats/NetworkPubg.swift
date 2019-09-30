@@ -11,8 +11,9 @@ import Foundation
 class NetworkPubg {
     let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJlYzEyMTA2MC1iZDAyLTAxMzctNWE4Yi02OWIwNDIzNDczYzAiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTY4ODk0Mzk2LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6Im1hcmttb2xlYXJ5LWdtIn0.URs3K6ENnIKCQofOCvKJIecUk5GmFz-twmw2CzG2MMg"
     var playerToSend: String = ""
+    var playerData: PlayerSeasonStats?
     
-    func sendUserNameInfo (userName: String) {
+    func sendUserNameInfo (userName: String, completionHandler: @escaping () -> Void)  {
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players?filter[playerNames]=\(userName)")!
         var getRequest = URLRequest(url: url)
@@ -40,12 +41,13 @@ class NetworkPubg {
         
             self.playerToSend = account
             
-            self.sendPlayerId()
+            self.sendPlayerIdClosure(completionHandler: completionHandler)
         }.resume()
         
     }
-    
-    func sendPlayerId () {
+    func sendPlayerIdClosure(completionHandler: @escaping () -> Void) {
+
+//    func sendPlayerId () -> Void {
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players/\(playerToSend)/seasons/lifetime")!
         var getRequest = URLRequest(url: url)
@@ -53,11 +55,14 @@ class NetworkPubg {
         getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
+        
         session.dataTask(with: getRequest) { (data, response, error) in
             guard let data = data else { return }
             
             do {
                let playerSeasonStats = try JSONDecoder().decode(PlayerSeasonStats.self, from: data)
+                self.playerData = playerSeasonStats
+                completionHandler()
                 print("headshot kills", playerSeasonStats.data?.attributes?.gameModeStats?.soloFpp?.headshotKills ?? -1)
             } catch let jsonErr {
                 print(jsonErr)
@@ -65,5 +70,6 @@ class NetworkPubg {
                 
                 
         }.resume()
-    }
+    
+}
 }

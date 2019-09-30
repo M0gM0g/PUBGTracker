@@ -9,8 +9,8 @@
 import UIKit
 
 class StatsViewController: UIViewController {
-    let network = NetworkPubg()
-    
+    var playerData: PlayerSeasonStats?
+
     var damageDealt: String = ""
     var longestKill: String = ""
     var roundsPlayed: String = ""
@@ -36,9 +36,8 @@ class StatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            damageDealtLabel?.text = network.
         
-            longestKillLabel?.text = longestKillLabel.text
+        longestKillLabel?.text = "\(playerData?.data?.attributes?.gameModeStats?.duoFpp?.damageDealt ?? 0 )"
         
             roundsPlayedLabel?.text = roundsPlayedLabel.text
         
