@@ -21,13 +21,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: Any ) {
-        let text: String = usernameTextField.text ?? ""
-        networkPubg.sendUserNameInfo(userName: text, completionHandler: {
+       
+       
+        let text: String = self.usernameTextField.text ?? ""
+        self.networkPubg.sendUserNameInfo(userName: text, completionHandler: {
             self.playerData = self.networkPubg.playerData
-            self.performSegue(withIdentifier: "mainToStatsSegue", sender: self)
-
+                
+        DispatchQueue.main.async { [weak self] in
+                self?.performSegue(withIdentifier: "mainToStatsSegue", sender: self)
+            self?.usernameTextField.text = ""
+            }
             
         })
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -35,8 +41,8 @@ class ViewController: UIViewController {
         if segue.destination is StatsViewController
         {
             let vc = segue.destination as? StatsViewController
-            vc?.playerData = playerData
+            vc?.playerData = self.playerData
         }
-}
 
+    }
 }

@@ -27,33 +27,20 @@ class StatsViewController: UIViewController {
     
     @IBAction func dismissPlayerStats(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        
 
-        
-        
-        
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+            self.damageDealtLabel?.text = damageDealtLabel.text! + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.damageDealt ?? 0 )"
         
-        longestKillLabel?.text = "\(playerData?.data?.attributes?.gameModeStats?.duoFpp?.damageDealt ?? 0 )"
+            self.longestKillLabel?.text = longestKillLabel.text! +  "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.longestKill ?? 0 )"
         
-            roundsPlayedLabel?.text = roundsPlayedLabel.text
+            self.roundsPlayedLabel?.text = roundsPlayedLabel.text! + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.roundsPlayed ?? 0)"
         
-            topTensLabel?.text = topTensLabel.text
+            self.topTensLabel?.text = self.topTensLabel.text! + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.top10S ?? 0)"
 
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

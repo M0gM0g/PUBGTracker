@@ -21,6 +21,8 @@ class NetworkPubg {
         getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         
+        
+       
         session.dataTask(with: getRequest) { (data, response, error) in
             guard let data = data else { return }
             
@@ -41,20 +43,21 @@ class NetworkPubg {
         
             self.playerToSend = account
             
-            self.sendPlayerIdClosure(completionHandler: completionHandler)
+            DispatchQueue.main.async { [weak self] in
+                self!.sendPlayerIdClosure(completionHandler: completionHandler)
+            }
         }.resume()
         
     }
     func sendPlayerIdClosure(completionHandler: @escaping () -> Void) {
 
-//    func sendPlayerId () -> Void {
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players/\(playerToSend)/seasons/lifetime")!
         var getRequest = URLRequest(url: url)
         
         getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
+        
         
         session.dataTask(with: getRequest) { (data, response, error) in
             guard let data = data else { return }
