@@ -21,14 +21,25 @@ class NetworkPubg {
         getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         
-        
-       
         session.dataTask(with: getRequest) { (data, response, error) in
             guard let data = data else { return }
+            print("response is \(response)")
+            if error != nil {
+                print("ooops you got an error")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("wrong user name")
+                
+                return
+            }
+            
             
             var json: Any?
             do {
                 json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                print(json)
             } catch {
                 
             }
@@ -36,21 +47,21 @@ class NetworkPubg {
             guard let jsonDict = json as? [String: Any] else {
                 return
             }
+            print(jsonDict)
+
             
             let account: String = ((jsonDict["data"] as! [Any])[0] as! [String: Any])["id"] as! String
             
             print(account)
-        
+            
             self.playerToSend = account
             
-            DispatchQueue.main.async { [weak self] in
-                self!.sendPlayerIdClosure(completionHandler: completionHandler)
-            }
-        }.resume()
-        
+            self.sendPlayerIdClosure(completionHandler: completionHandler)
+            }.resume()
     }
+    
     func sendPlayerIdClosure(completionHandler: @escaping () -> Void) {
-
+        
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players/\(playerToSend)/seasons/lifetime")!
         var getRequest = URLRequest(url: url)
@@ -63,16 +74,18 @@ class NetworkPubg {
             guard let data = data else { return }
             
             do {
-               let playerSeasonStats = try JSONDecoder().decode(PlayerSeasonStats.self, from: data)
+                let playerSeasonStats = try JSONDecoder().decode(PlayerSeasonStats.self, from: data)
                 self.playerData = playerSeasonStats
-                completionHandler()
-                print("headshot kills", playerSeasonStats.data?.attributes?.gameModeStats?.soloFpp?.headshotKills ?? -1)
+                
+                DispatchQueue.main.async {
+                    completionHandler()
+                }
             } catch let jsonErr {
                 print(jsonErr)
             }
-                
-                
-        }.resume()
-    
-}
+            
+            
+            }.resume()
+        
+    }
 }

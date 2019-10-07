@@ -41,17 +41,27 @@
                                     <action selector="submitButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zi8-GB-cZH"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4m-I7-DF7" userLabel="Error Label">
+                                <rect key="frame" x="30" y="575" width="354" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.33357238560000002" blue="0.32133480250000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="l4m-I7-DF7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1Zt-8N-aQi"/>
                             <constraint firstItem="d4x-Rd-bxr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3kG-39-2uB"/>
                             <constraint firstItem="P4N-CA-tQT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="99M-il-8h8"/>
                             <constraint firstItem="Irm-ch-WjC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="E6f-fJ-Swc"/>
+                            <constraint firstItem="d4x-Rd-bxr" firstAttribute="top" secondItem="l4m-I7-DF7" secondAttribute="bottom" constant="27" id="FKO-Np-bEc"/>
+                            <constraint firstItem="l4m-I7-DF7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="GUM-r6-huq"/>
                             <constraint firstItem="P4N-CA-tQT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YPh-CN-pId"/>
                             <constraint firstItem="Irm-ch-WjC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="arg-uH-RX3"/>
                             <constraint firstAttribute="bottom" secondItem="P4N-CA-tQT" secondAttribute="bottom" constant="350" id="d2e-MC-Yvh"/>
                             <constraint firstAttribute="trailing" secondItem="P4N-CA-tQT" secondAttribute="trailing" id="dNQ-JK-7tP"/>
                             <constraint firstItem="d4x-Rd-bxr" firstAttribute="top" secondItem="P4N-CA-tQT" secondAttribute="bottom" constant="56" id="dWa-gD-tAI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="l4m-I7-DF7" secondAttribute="trailing" constant="30" id="i8x-N9-HWN"/>
                             <constraint firstItem="Irm-ch-WjC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="472" id="koP-8M-Mwb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Irm-ch-WjC" secondAttribute="trailing" constant="20" id="sQo-XB-Enx"/>
                             <constraint firstItem="P4N-CA-tQT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wln-Es-kcv"/>
@@ -59,6 +69,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="errorLabel" destination="l4m-I7-DF7" id="Ee2-H0-xY7"/>
                         <outlet property="usernameTextField" destination="Irm-ch-WjC" id="GXI-g9-WIa"/>
                         <segue destination="FVv-4X-N0M" kind="presentation" identifier="mainToStatsSegue" id="xf0-QO-Aal"/>
                     </connections>

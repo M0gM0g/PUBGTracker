@@ -14,24 +14,25 @@ class ViewController: UIViewController {
     var networkPubg = NetworkPubg()
     var playerData: PlayerSeasonStats?
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
     }
+    @IBOutlet weak var errorLabel: UILabel!
+    
     
     @IBAction func submitButton(_ sender: Any ) {
-       
-       
+        
         let text: String = self.usernameTextField.text ?? ""
+        
         self.networkPubg.sendUserNameInfo(userName: text, completionHandler: {
             self.playerData = self.networkPubg.playerData
-                
-        DispatchQueue.main.async { [weak self] in
-                self?.performSegue(withIdentifier: "mainToStatsSegue", sender: self)
-            self?.usernameTextField.text = ""
-            }
             
+                self.performSegue(withIdentifier: "mainToStatsSegue", sender: self)
+                self.usernameTextField.text = ""            
         })
         
     }
@@ -43,6 +44,6 @@ class ViewController: UIViewController {
             let vc = segue.destination as? StatsViewController
             vc?.playerData = self.playerData
         }
-
+        
     }
 }

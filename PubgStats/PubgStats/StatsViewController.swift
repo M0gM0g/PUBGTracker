@@ -10,7 +10,6 @@ import UIKit
 
 class StatsViewController: UIViewController {
     var playerData: PlayerSeasonStats?
-
     var damageDealt: String = ""
     var longestKill: String = ""
     var roundsPlayed: String = ""
@@ -28,19 +27,18 @@ class StatsViewController: UIViewController {
     @IBAction func dismissPlayerStats(_ sender: Any) {
         dismiss(animated: true, completion: nil)
         
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
-            self.damageDealtLabel?.text = damageDealtLabel.text! + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.damageDealt ?? 0 )"
         
-            self.longestKillLabel?.text = longestKillLabel.text! +  "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.longestKill ?? 0 )"
+        self.damageDealtLabel?.text = damageDealtLabel.text! + " " + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.damageDealt ?? 0 )"
         
-            self.roundsPlayedLabel?.text = roundsPlayedLabel.text! + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.roundsPlayed ?? 0)"
+        self.longestKillLabel?.text = longestKillLabel.text! + " " + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.longestKill ?? 0 )"
         
-            self.topTensLabel?.text = self.topTensLabel.text! + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.top10S ?? 0)"
-
+        self.roundsPlayedLabel?.text = roundsPlayedLabel.text! + " " + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.roundsPlayed ?? 0)"
+        
+        self.topTensLabel?.text = self.topTensLabel.text! + " " + "\(self.playerData?.data?.attributes?.gameModeStats?.duoFpp?.top10S ?? 0)"
+        
     }
 }
