@@ -13,7 +13,7 @@ class NetworkPubg {
     var playerToSend: String = ""
     var playerData: PlayerSeasonStats?
     
-    func sendUserNameInfo (userName: String, completionHandler: @escaping () -> Void)  {
+    func sendUserNameInfo (userName: String, completionHandler: @escaping (Bool) -> Void)  {
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players?filter[playerNames]=\(userName)")!
         var getRequest = URLRequest(url: url)
@@ -21,9 +21,9 @@ class NetworkPubg {
         getRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         getRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "accept")
         
-        session.dataTask(with: getRequest) { (data, response, error) in
+        session.dataTask(with: getRequest) { (data, response, error) in            
             guard let data = data else { return }
-            print("response is \(response)")
+            print(data)
             if error != nil {
                 print("ooops you got an error")
                 return
@@ -31,10 +31,9 @@ class NetworkPubg {
             
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                 print("wrong user name")
-                
+                completionHandler(false)
                 return
             }
-            
             
             var json: Any?
             do {
@@ -60,7 +59,7 @@ class NetworkPubg {
             }.resume()
     }
     
-    func sendPlayerIdClosure(completionHandler: @escaping () -> Void) {
+    func sendPlayerIdClosure(completionHandler: @escaping (Bool) -> Void) {
         
         let session = URLSession.shared
         let url = URL(string: "https://api.pubg.com/shards/steam/players/\(playerToSend)/seasons/lifetime")!
@@ -78,9 +77,10 @@ class NetworkPubg {
                 self.playerData = playerSeasonStats
                 
                 DispatchQueue.main.async {
-                    completionHandler()
+                    completionHandler(true)
                 }
             } catch let jsonErr {
+                completionHandler(false)
                 print(jsonErr)
             }
             

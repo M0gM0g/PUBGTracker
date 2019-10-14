@@ -18,7 +18,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        errorLabel.text = "User cannot be found."
+        errorLabel.isHidden = true 
         
     }
     @IBOutlet weak var errorLabel: UILabel!
@@ -28,11 +29,21 @@ class ViewController: UIViewController {
         
         let text: String = self.usernameTextField.text ?? ""
         
-        self.networkPubg.sendUserNameInfo(userName: text, completionHandler: {
+        
+        
+        self.networkPubg.sendUserNameInfo(userName: text, completionHandler: { wasSuccessfull in
+            DispatchQueue.main.async {
+            if wasSuccessfull == true {
             self.playerData = self.networkPubg.playerData
             
                 self.performSegue(withIdentifier: "mainToStatsSegue", sender: self)
-                self.usernameTextField.text = ""            
+            } else {
+                self.errorLabel.isHidden = false
+
+            }
+                self.usernameTextField.text = ""
+
+            }
         })
         
     }
